@@ -1,1 +1,18 @@
-model.fit(x_train,y_train,batch_size=10,epochs=1,validation_data=(x_valid,y_valid),verbose=1)
+model = Sequential()
+model.add(layers.Conv2D(75,(3,3),padding="same",strides=1,activation='relu',input_shape=(28,28,1)))
+model.add(layers.BatchNormalization())
+model.add(layers.MaxPooling2D((2,2)))
+
+model.add(layers.Conv2D(50,(3,3),padding="same",strides=1,activation='relu'))
+model.add(layers.BatchNormalization())
+model.add(layers.MaxPooling2D((2,2)))
+
+model.add(layers.Conv2D(25,(3,3),padding="same",strides=1,activation='relu'))
+model.add(layers.BatchNormalization())
+model.add(layers.MaxPooling2D((2,2)))
+
+model.add(layers.Flatten()) # value ne ek array ma
+model.add(layers.Dense(units=255,activation='relu')) # create hidden layer 
+model.add(layers.Dropout(0.3))
+model.add(layers.Dense(10,activation="softmax")) # last dense is output layer
+model.summary()
